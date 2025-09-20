@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,8 +13,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock, Mail, User } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function SignupPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleSignUp = () => {
+    // In a real app, you'd handle user creation here.
+    // For now, we'll just redirect to login.
+    const redirectUrl = searchParams.get('redirect');
+    if (redirectUrl) {
+      const newParams = new URLSearchParams(searchParams.toString());
+      router.push(`/login?${newParams.toString()}`);
+    } else {
+      router.push('/login');
+    }
+  };
+
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12">
       <Card className="w-full max-w-sm">
@@ -46,7 +64,7 @@ export default function SignupPage() {
           </div>
         </CardContent>
         <CardFooter className="flex-col gap-4">
-          <Button className="w-full">Sign up</Button>
+          <Button className="w-full" onClick={handleSignUp}>Sign up</Button>
            <div className="text-sm text-center">
             Already have an account?{" "}
             <Link href="/login" className="underline">

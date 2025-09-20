@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,8 +13,27 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock, Mail } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleSignIn = () => {
+    // In a real app, you'd handle authentication here.
+    // For now, we'll just redirect.
+    const redirectUrl = searchParams.get('redirect');
+    if (redirectUrl) {
+      const newParams = new URLSearchParams(searchParams.toString());
+      newParams.delete('redirect');
+      const bookingId = `BRZ-${Date.now()}`;
+      router.push(`/confirmation/${bookingId}?${newParams.toString()}`);
+    } else {
+      router.push('/');
+    }
+  };
+
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12">
       <Card className="w-full max-w-sm">
@@ -39,7 +60,7 @@ export default function LoginPage() {
           </div>
         </CardContent>
         <CardFooter className="flex-col gap-4">
-          <Button className="w-full">Sign in</Button>
+          <Button className="w-full" onClick={handleSignIn}>Sign in</Button>
           <div className="text-sm text-center">
             Don't have an account?{" "}
             <Link href="/signup" className="underline">
