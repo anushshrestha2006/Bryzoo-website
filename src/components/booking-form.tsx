@@ -218,7 +218,7 @@ export default function BookingForm() {
                               <Car className="mr-4 h-8 w-8 text-primary" />
                               <div>
                                 <h3 className="font-semibold">Sumo</h3>
-                                <p className="text-sm text-muted-foreground">Standard 10-seater vehicle.</p>
+                                <p className="text-sm text-muted-foreground">Standard 9-seater vehicle.</p>
                               </div>
                             </label>
                           </Card>
@@ -232,7 +232,7 @@ export default function BookingForm() {
                               <Zap className="mr-4 h-8 w-8 text-green-500" />
                               <div>
                                 <h3 className="font-semibold">Electric Vehicle</h3>
-                                <p className="text-sm text-muted-foreground">Eco-friendly 4-seater car.</p>
+                                <p className="text-sm text-muted-foreground">Eco-friendly 10-seater car.</p>
                               </div>
                             </label>
                           </Card>

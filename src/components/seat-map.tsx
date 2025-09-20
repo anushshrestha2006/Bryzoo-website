@@ -18,17 +18,20 @@ const vehicleLayouts = {
   sumo: [
     { id: 's1', number: 1, available: true }, { id: 's2', number: 2, available: false }, { id: 's3', number: 3, available: true },
     { id: 's4', number: 4, available: true }, { id: 's5', number: 5, available: true }, { id: 's6', number: 6, available: true }, { id: 's7', number: 7, available: false },
-    { id: 's8', number: 8, available: true }, { id: 's9', number: 9, available: false }, { id: 's10', number: 10, available: true },
+    { id: 's8', number: 8, available: true }, { id: 's9', number: 9, available: false },
   ],
   ev: [
     { id: 'e1', number: 1, available: false }, { id: 'e2', number: 2, available: true },
     { id: 'e3', number: 3, available: true }, { id: 'e4', number: 4, available: true },
+    { id: 'e5', number: 5, available: true }, { id: 'e6', number: 6, available: false },
+    { id: 'e7', number: 7, available: true }, { id: 'e8', number: 8, available: true },
+    { id: 'e9', number: 9, available: false }, { id: 'e10', number: 10, available: true },
   ],
 };
 
 const vehicleGrids = {
-    sumo: "grid-cols-4",
-    ev: "grid-cols-2"
+    sumo: "grid-cols-3",
+    ev: "grid-cols-4"
 }
 
 export default function SeatMap() {
