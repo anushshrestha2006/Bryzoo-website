@@ -16,23 +16,18 @@ import { Separator } from "./ui/separator";
 
 const vehicleLayouts = {
   sumo: [
-    { id: 's1', number: 1, available: true }, { id: 's2', number: 2, available: false }, { id: 's3', number: 3, available: true },
-    { id: 's4', number: 4, available: true }, { id: 's5', number: 5, available: true }, { id: 's6', number: 6, available: true }, { id: 's7', number: 7, available: false },
-    { id: 's8', number: 8, available: true }, { id: 's9', number: 9, available: false },
+    [{ id: 's1', number: 1, available: true }],
+    [{ id: 's2', number: 2, available: false }, { id: 's3', number: 3, available: true }, { id: 's4', number: 4, available: true }, { id: 's5', number: 5, available: true }],
+    [{ id: 's6', number: 6, available: true }, { id: 's7', number: 7, available: false }, { id: 's8', number: 8, available: true }, { id: 's9', number: 9, available: false }],
   ],
   ev: [
-    { id: 'e1', number: 1, available: false }, { id: 'e2', number: 2, available: true },
-    { id: 'e3', number: 3, available: true }, { id: 'e4', number: 4, available: true },
-    { id: 'e5', number: 5, available: true }, { id: 'e6', number: 6, available: false },
-    { id: 'e7', number: 7, available: true }, { id: 'e8', number: 8, available: true },
-    { id: 'e9', number: 9, available: false }, { id: 'e10', number: 10, available: true },
+    [{ id: 'e1', number: 1, available: false }],
+    [{ id: 'e2', number: 2, available: true }, { id: 'e3', number: 3, available: true }, { id: 'e4', number: 4, available: true }],
+    [{ id: 'e5', number: 5, available: true }, { id: 'e6', number: 6, available: false }, { id: 'e7', number: 7, available: true }],
+    [{ id: 'e8', number: 8, available: true }, { id: 'e9', number: 9, available: false }, { id: 'e10', number: 10, available: true }],
   ],
 };
 
-const vehicleGrids = {
-    sumo: "grid-cols-3",
-    ev: "grid-cols-4"
-}
 
 export default function SeatMap() {
   const router = useRouter();
@@ -52,7 +47,6 @@ export default function SeatMap() {
   }
   
   const layout = vehicleLayouts[bookingDetails.vehicle] || [];
-  const gridClass = vehicleGrids[bookingDetails.vehicle] || "grid-cols-4";
 
   const handleSeatClick = (seatId: string) => {
     setSelectedSeats((prev) =>
@@ -94,19 +88,23 @@ export default function SeatMap() {
                     <div className="max-w-md mx-auto">
                         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 md:p-6 space-y-4">
                             <div className="text-center text-sm font-medium text-muted-foreground">Front of Vehicle</div>
-                            <div className={`grid ${gridClass} gap-2 md:gap-4`}>
-                                {layout.map((seat) => (
-                                <Button
-                                    key={seat.id}
-                                    variant={getSeatVariant(seat)}
-                                    disabled={!seat.available}
-                                    onClick={() => handleSeatClick(seat.id)}
-                                    className="aspect-square h-auto w-auto p-1 flex flex-col"
-                                    aria-label={`Seat ${seat.number}`}
-                                >
-                                    <Armchair className="h-6 w-6 md:h-8 md:w-8" />
-                                    <span className="text-xs">{seat.number}</span>
-                                </Button>
+                            <div className="space-y-4">
+                                {layout.map((row, rowIndex) => (
+                                    <div key={rowIndex} className="flex justify-center gap-2 md:gap-4">
+                                        {row.map((seat) => (
+                                        <Button
+                                            key={seat.id}
+                                            variant={getSeatVariant(seat)}
+                                            disabled={!seat.available}
+                                            onClick={() => handleSeatClick(seat.id)}
+                                            className="aspect-square h-auto w-16 p-1 flex flex-col"
+                                            aria-label={`Seat ${seat.number}`}
+                                        >
+                                            <Armchair className="h-6 w-6 md:h-8 md:w-8" />
+                                            <span className="text-xs">{seat.number}</span>
+                                        </Button>
+                                        ))}
+                                    </div>
                                 ))}
                             </div>
                             <div className="flex justify-center space-x-4 pt-4 text-sm">
