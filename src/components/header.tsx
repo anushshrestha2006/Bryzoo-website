@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BryzooLogo } from "./icons";
 import { Button } from "./ui/button";
-import { User } from "lucide-react";
+import { User, UserPlus } from "lucide-react";
 
 export default function Header() {
   return (
@@ -11,12 +11,18 @@ export default function Header() {
           <BryzooLogo className="h-6 w-6" />
           <span className="font-bold font-headline">Bryzoo</span>
         </Link>
-        <div className="flex flex-1 items-center justify-end space-x-4">
+        <div className="flex flex-1 items-center justify-end space-x-2">
           <nav className="flex items-center space-x-1">
             <Button variant="ghost" asChild>
               <Link href="/login">
                 <User className="mr-2 h-4 w-4" />
-                Admin Login
+                Login
+              </Link>
+            </Button>
+            <Button asChild>
+              <Link href="/signup">
+                <UserPlus className="mr-2 h-4 w-4" />
+                Signup
               </Link>
             </Button>
           </nav>
