@@ -6,7 +6,6 @@ import {
   Car,
   Zap,
   Calendar,
-  Clock,
   MapPin,
   ArrowRight,
   Armchair,
@@ -41,7 +40,6 @@ export default function SeatMap() {
     origin: searchParams.get("origin"),
     destination: searchParams.get("destination"),
     date: searchParams.get("date"),
-    time: searchParams.get("time"),
     vehicle: searchParams.get("vehicle") as keyof typeof vehicleLayouts,
   }), [searchParams]);
 
@@ -134,10 +132,6 @@ export default function SeatMap() {
                     <div className="flex items-center">
                         <Calendar className="h-5 w-5 mr-2 text-muted-foreground" />
                         <span>{bookingDetails.date}</span>
-                    </div>
-                    <div className="flex items-center">
-                        <Clock className="h-5 w-5 mr-2 text-muted-foreground" />
-                        <span className="capitalize">{bookingDetails.time}</span>
                     </div>
                     <div className="flex items-center">
                         {renderVehicleIcon()}

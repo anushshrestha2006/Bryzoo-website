@@ -7,7 +7,6 @@ import {
   Car,
   Zap,
   Calendar,
-  Clock,
   MapPin,
   ArrowRight,
   Armchair,
@@ -34,7 +33,6 @@ export default function ConfirmationPage() {
       origin: searchParams.get("origin"),
       destination: searchParams.get("destination"),
       date: searchParams.get("date"),
-      time: searchParams.get("time"),
       vehicle: searchParams.get("vehicle"),
       seats: searchParams.get("seats"),
     }),
@@ -74,19 +72,12 @@ export default function ConfirmationPage() {
               <span>{bookingDetails.destination}</span>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div className="flex items-center">
               <Calendar className="h-5 w-5 mr-2 text-muted-foreground" />
               <div>
                 <p className="text-muted-foreground">Date</p>
                 <p className="font-medium">{bookingDetails.date}</p>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <Clock className="h-5 w-5 mr-2 text-muted-foreground" />
-              <div>
-                <p className="text-muted-foreground">Time</p>
-                <p className="font-medium capitalize">{bookingDetails.time}</p>
               </div>
             </div>
             <div className="flex items-center">

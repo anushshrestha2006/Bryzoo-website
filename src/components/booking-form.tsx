@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import {
   Car,
   Calendar as CalendarIcon,
-  Clock,
   MapPin,
   ArrowRight,
   Zap,
@@ -56,9 +55,6 @@ const bookingFormSchema = z
     date: z.date({
       required_error: "A date of travel is required.",
     }),
-    time: z.string({
-      required_error: "Please select a time slot.",
-    }),
     vehicle: z.string({
       required_error: "Please select a vehicle type.",
     }),
@@ -82,8 +78,10 @@ export default function BookingForm() {
 
   function onSubmit(data: BookingFormValues) {
     const params = new URLSearchParams({
-      ...data,
+      origin: data.origin,
+      destination: data.destination,
       date: format(data.date, "yyyy-MM-dd"),
+      vehicle: data.vehicle,
     });
     router.push(`/booking?${params.toString()}`);
   }
@@ -160,73 +158,45 @@ export default function BookingForm() {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="date"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel>Date of Travel</FormLabel>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <FormControl>
-                          <Button
-                            variant={"outline"}
-                            className={cn(
-                              "w-full pl-3 text-left font-normal",
-                              !field.value && "text-muted-foreground"
-                            )}
-                          >
-                            {field.value ? (
-                              format(field.value, "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) => date < new Date() || date > new Date("2030-01-01")}
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="time"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Time Slot</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+            <FormField
+              control={form.control}
+              name="date"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Date of Travel</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
                       <FormControl>
-                        <SelectTrigger>
-                          <Clock className="mr-2 h-4 w-4" />
-                          <SelectValue placeholder="Select a time" />
-                        </SelectTrigger>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-full pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value="morning">Morning (6 AM - 9 AM)</SelectItem>
-                        <SelectItem value="afternoon">Afternoon (12 PM - 3 PM)</SelectItem>
-                        <SelectItem value="evening">Evening (6 PM - 9 PM)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) => date < new Date() || date > new Date("2030-01-01")}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             
             <FormField
               control={form.control}
