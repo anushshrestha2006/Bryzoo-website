@@ -9,6 +9,7 @@ import {
   MapPin,
   ArrowRight,
   Armchair,
+  SteeringWheel,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "./ui/card";
@@ -90,7 +91,8 @@ export default function SeatMap() {
                             <div className="text-center text-sm font-medium text-muted-foreground">Front of Vehicle</div>
                             <div className="space-y-4">
                                 {layout.map((row, rowIndex) => (
-                                    <div key={rowIndex} className="flex justify-center gap-2 md:gap-4">
+                                    <div key={rowIndex} className="flex justify-center items-center gap-2 md:gap-4">
+                                        {rowIndex === 0 && <div className="w-16"></div> }
                                         {row.map((seat) => (
                                         <Button
                                             key={seat.id}
@@ -104,6 +106,12 @@ export default function SeatMap() {
                                             <span className="text-xs">{seat.number}</span>
                                         </Button>
                                         ))}
+                                        {rowIndex === 0 && 
+                                            <div className="w-16 aspect-square p-1 flex flex-col items-center justify-center">
+                                                <SteeringWheel className="h-6 w-6 md:h-8 md:w-8 text-muted-foreground"/>
+                                                <span className="text-xs text-muted-foreground">Driver</span>
+                                            </div>
+                                        }
                                     </div>
                                 ))}
                             </div>
