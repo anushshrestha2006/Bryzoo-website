@@ -18,12 +18,24 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Progress } from "@/components/ui/progress";
 
 export default function SignupPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [date, setDate] = useState<Date>();
+  const [password, setPassword] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState(0);
+
+  useEffect(() => {
+    let strength = 0;
+    if (password.length > 7) strength += 25;
+    if (password.match(/[A-Z]/)) strength += 25;
+    if (password.match(/[0-9]/)) strength += 25;
+    if (password.match(/[^A-Za-z0-9]/)) strength += 25;
+    setPasswordStrength(strength);
+  }, [password]);
 
   const handleSignUp = () => {
     // In a real app, you'd handle user creation here.
@@ -37,6 +49,12 @@ export default function SignupPage() {
     }
   };
 
+  const getStrengthColor = () => {
+    if (passwordStrength < 50) return "bg-destructive";
+    if (passwordStrength < 75) return "bg-yellow-500";
+    return "bg-green-500";
+  };
+
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12 px-4">
       <Card className="w-full max-w-sm">
@@ -47,6 +65,13 @@ export default function SignupPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="profile-photo">Profile Photo</Label>
+             <div className="relative">
+                <Camera className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input id="profile-photo" type="file" required className="pl-10" />
+             </div>
+          </div>
           <div className="grid gap-2">
             <Label htmlFor="name">Full Name</Label>
             <div className="relative">
@@ -59,13 +84,6 @@ export default function SignupPage() {
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input id="email" type="email" placeholder="user@bryzoo.com" required className="pl-10" />
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input id="password" type="password" required className="pl-10" />
             </div>
           </div>
           <div className="grid gap-2">
@@ -97,11 +115,33 @@ export default function SignupPage() {
             </Popover>
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="profile-photo">Profile Photo</Label>
-             <div className="relative">
-                <Camera className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input id="profile-photo" type="file" required className="pl-10" />
-             </div>
+            <Label htmlFor="password">Password</Label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input 
+                id="password" 
+                type="password" 
+                required 
+                className="pl-10" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            {password.length > 0 && (
+              <div className="space-y-1">
+                <Progress value={passwordStrength} className="h-2 [&>div]:transition-all [&>div]:duration-300" indicatorClassName={getStrengthColor()} />
+                <p className="text-xs text-muted-foreground">
+                  Password strength: {passwordStrength}%
+                </p>
+              </div>
+            )}
+          </div>
+           <div className="grid gap-2">
+            <Label htmlFor="confirm-password">Confirm Password</Label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input id="confirm-password" type="password" required className="pl-10" />
+            </div>
           </div>
         </CardContent>
         <CardFooter className="flex-col gap-4">
