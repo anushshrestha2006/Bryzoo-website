@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 const fontPoppins = Poppins({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function RootLayout({
         <div className="relative flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>
+          <Footer />
         </div>
         <Toaster />
       </body>

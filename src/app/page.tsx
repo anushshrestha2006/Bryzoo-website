@@ -13,7 +13,7 @@ export default function Home() {
         </p>
       </section>
 
-      <div className="relative mx-auto max-w-4xl mb-12">
+      <div id="booking" className="relative mx-auto max-w-4xl mb-12 scroll-mt-20">
         <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-xl blur-lg opacity-50"></div>
         <div className="relative">
           <BookingForm />
