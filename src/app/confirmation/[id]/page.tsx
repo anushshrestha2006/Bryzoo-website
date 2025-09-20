@@ -48,31 +48,36 @@ export default function ConfirmationPage() {
   };
 
   return (
-    <div className="container py-12 flex justify-center">
+    <div className="container py-12 flex justify-center px-4">
       <Card className="w-full max-w-2xl">
-        <CardHeader className="items-center text-center">
+        <CardHeader className="items-center text-center p-4 md:p-6">
           <CheckCircle2 className="h-16 w-16 text-green-500 mb-4" />
-          <CardTitle className="font-headline text-3xl">
+          <CardTitle className="font-headline text-2xl md:text-3xl">
             Booking Confirmed!
           </CardTitle>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-center">
             Your ride is booked. Thank you for choosing Bryzoo.
           </p>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 p-4 md:p-6">
           <div className="border rounded-lg p-4 space-y-4">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-wrap justify-between items-center gap-2">
               <span className="text-sm text-muted-foreground">Booking ID</span>
-              <Badge variant="secondary">{bookingDetails.id}</Badge>
+              <Badge variant="secondary" className="text-xs">{bookingDetails.id}</Badge>
             </div>
-            <div className="flex items-center text-lg font-medium">
-              <MapPin className="h-5 w-5 mr-2 text-primary" />
-              <span>{bookingDetails.origin}</span>
-              <ArrowRight className="h-4 w-4 mx-4 text-muted-foreground" />
-              <span>{bookingDetails.destination}</span>
+            <div className="flex flex-col sm:flex-row items-center text-lg font-medium text-center">
+              <div className="flex items-center">
+                <MapPin className="h-5 w-5 mr-2 text-primary hidden sm:block" />
+                <span>{bookingDetails.origin}</span>
+              </div>
+              <ArrowRight className="h-4 w-4 mx-2 my-2 sm:my-0 text-muted-foreground" />
+              <div className="flex items-center">
+                <MapPin className="h-5 w-5 mr-2 text-primary hidden sm:block" />
+                <span>{bookingDetails.destination}</span>
+              </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
             <div className="flex items-center">
               <Calendar className="h-5 w-5 mr-2 text-muted-foreground" />
               <div>
@@ -91,12 +96,12 @@ export default function ConfirmationPage() {
               <Armchair className="h-5 w-5 mr-2 text-muted-foreground" />
               <div>
                 <p className="text-muted-foreground">Seats</p>
-                <p className="font-medium">{bookingDetails.seats}</p>
+                <p className="font-medium break-all">{bookingDetails.seats}</p>
               </div>
             </div>
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="p-4 md:p-6">
           <Button className="w-full" asChild>
             <Link href="/">Book Another Ride</Link>
           </Button>

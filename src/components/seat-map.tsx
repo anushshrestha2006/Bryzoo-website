@@ -102,7 +102,7 @@ export default function SeatMap() {
 
   return (
     <>
-      <div className="container py-12">
+      <div className="container py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
               <Card>
@@ -117,30 +117,30 @@ export default function SeatMap() {
                               <div className="space-y-4">
                                   {layout.map((row, rowIndex) => (
                                       <div key={rowIndex} className="flex justify-center items-center gap-2 md:gap-4">
-                                          {rowIndex === 0 && <div className="w-16"></div> }
+                                          {rowIndex === 0 && <div className="w-10 sm:w-16"></div> }
                                           {row.map((seat) => (
                                           <Button
                                               key={seat.id}
                                               variant={getSeatVariant(seat)}
                                               disabled={!seat.available}
                                               onClick={() => handleSeatClick(seat.id)}
-                                              className="aspect-square h-auto w-16 p-1 flex flex-col"
+                                              className="aspect-square h-auto w-10 sm:w-16 p-1 flex flex-col"
                                               aria-label={`Seat ${seat.number}`}
                                           >
-                                              <Armchair className="h-6 w-6 md:h-8 md:w-8" />
+                                              <Armchair className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />
                                               <span className="text-xs">{seat.number}</span>
                                           </Button>
                                           ))}
                                           {rowIndex === 0 && 
-                                              <div className="w-16 aspect-square p-1 flex flex-col items-center justify-center">
-                                                  <LifeBuoy className="h-6 w-6 md:h-8 md:w-8 text-muted-foreground"/>
-                                                  <span className="text-xs text-muted-foreground">Driver</span>
+                                              <div className="w-10 sm:w-16 aspect-square p-1 flex flex-col items-center justify-center">
+                                                  <LifeBuoy className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-muted-foreground"/>
+                                                  <span className="text-xs text-muted-foreground text-center">Driver</span>
                                               </div>
                                           }
                                       </div>
                                   ))}
                               </div>
-                              <div className="flex justify-center space-x-4 pt-4 text-sm">
+                              <div className="flex justify-center space-x-4 pt-4 text-xs sm:text-sm">
                                   <div className="flex items-center"><Armchair className="h-4 w-4 mr-2 text-primary fill-primary"/> Selected</div>
                                   <div className="flex items-center"><Armchair className="h-4 w-4 mr-2 border-2 rounded-sm"/> Available</div>
                                   <div className="flex items-center"><Armchair className="h-4 w-4 mr-2 text-muted-foreground fill-muted"/> Booked</div>
@@ -175,7 +175,7 @@ export default function SeatMap() {
                       <div>
                           <h4 className="font-semibold mb-2">Selected Seats:</h4>
                           {selectedSeats.length > 0 ? (
-                              <p className="font-mono text-lg font-bold text-primary">{selectedSeats.join(', ')}</p>
+                              <p className="font-mono text-lg font-bold text-primary break-all">{selectedSeats.join(', ')}</p>
                           ) : (
                               <p className="text-muted-foreground">No seats selected yet.</p>
                           )}

@@ -14,7 +14,6 @@ import { Label } from "@/components/ui/label";
 import { Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -35,7 +34,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12">
+    <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12 px-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-headline">Login</CardTitle>

@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 function SeatMapLoading() {
     return (
-        <div className="container py-12">
+        <div className="container py-8 md:py-12">
             <div className="animate-pulse">
                 <div className="h-8 w-1/2 bg-muted rounded-md mb-2"></div>
                 <div className="h-6 w-1/3 bg-muted rounded-md mb-8"></div>
