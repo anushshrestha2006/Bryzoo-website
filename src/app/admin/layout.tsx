@@ -99,7 +99,7 @@ export default function AdminLayout({
                   Promo Codes
                 </Link>
               </SidebarMenuButton>
-            </SidebarMenuItem>
+            </I debarMenuItem>
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
