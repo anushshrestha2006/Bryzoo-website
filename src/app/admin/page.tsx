@@ -73,7 +73,7 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.title}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -96,41 +96,43 @@ export default function AdminDashboardPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Booking ID</TableHead>
-                <TableHead>User</TableHead>
-                <TableHead>Trip</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {recentBookings.map((booking) => (
-                <TableRow key={booking.id}>
-                  <TableCell className="font-medium">{booking.id}</TableCell>
-                  <TableCell>{booking.user}</TableCell>
-                  <TableCell>{booking.trip}</TableCell>
-                  <TableCell>{booking.date}</TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        booking.status === "Approved"
-                          ? "default"
-                          : booking.status === "Pending"
-                          ? "secondary"
-                          : "destructive"
-                      }
-                      className={booking.status === "Approved" ? "bg-green-600" : ""}
-                    >
-                      {booking.status}
-                    </Badge>
-                  </TableCell>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Booking ID</TableHead>
+                  <TableHead>User</TableHead>
+                  <TableHead>Trip</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Status</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {recentBookings.map((booking) => (
+                  <TableRow key={booking.id}>
+                    <TableCell className="font-medium">{booking.id}</TableCell>
+                    <TableCell>{booking.user}</TableCell>
+                    <TableCell>{booking.trip}</TableCell>
+                    <TableCell>{booking.date}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          booking.status === "Approved"
+                            ? "default"
+                            : booking.status === "Pending"
+                            ? "secondary"
+                            : "destructive"
+                        }
+                        className={booking.status === "Approved" ? "bg-green-600" : ""}
+                      >
+                        {booking.status}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

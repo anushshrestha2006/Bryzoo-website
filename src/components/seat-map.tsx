@@ -117,23 +117,23 @@ export default function SeatMap() {
                               <div className="space-y-4">
                                   {layout.map((row, rowIndex) => (
                                       <div key={rowIndex} className="flex justify-center items-center gap-2 md:gap-4">
-                                          {rowIndex === 0 && <div className="w-10 sm:w-16"></div> }
+                                          {rowIndex === 0 && <div className="w-10 sm:w-12"></div> }
                                           {row.map((seat) => (
                                           <Button
                                               key={seat.id}
                                               variant={getSeatVariant(seat)}
                                               disabled={!seat.available}
                                               onClick={() => handleSeatClick(seat.id)}
-                                              className="aspect-square h-auto w-10 sm:w-16 p-1 flex flex-col"
+                                              className="aspect-square h-auto w-12 sm:w-16 p-1 flex flex-col"
                                               aria-label={`Seat ${seat.number}`}
                                           >
-                                              <Armchair className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />
+                                              <Armchair className="h-5 w-5 sm:h-6 sm:w-6" />
                                               <span className="text-xs">{seat.number}</span>
                                           </Button>
                                           ))}
                                           {rowIndex === 0 && 
-                                              <div className="w-10 sm:w-16 aspect-square p-1 flex flex-col items-center justify-center">
-                                                  <LifeBuoy className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-muted-foreground"/>
+                                              <div className="w-10 sm:w-12 aspect-square p-1 flex flex-col items-center justify-center">
+                                                  <LifeBuoy className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground"/>
                                                   <span className="text-xs text-muted-foreground text-center">Driver</span>
                                               </div>
                                           }

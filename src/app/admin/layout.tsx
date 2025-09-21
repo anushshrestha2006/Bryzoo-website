@@ -99,7 +99,7 @@ export default function AdminLayout({
                   Promo Codes
                 </Link>
               </SidebarMenuButton>
-            </I debarMenuItem>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
@@ -109,11 +109,9 @@ export default function AdminLayout({
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <header className="flex h-14 items-center justify-between border-b bg-background px-4">
-          <div className="flex items-center gap-2">
-            <SidebarTrigger className="md:hidden" />
-            <h1 className="text-lg font-semibold">Dashboard</h1>
-          </div>
+        <header className="flex h-14 items-center justify-between border-b bg-background px-4 md:justify-end">
+          <SidebarTrigger className="md:hidden" />
+          <h1 className="text-lg font-semibold md:hidden">Dashboard</h1>
         </header>
         <main className="flex-1 overflow-auto p-4">{children}</main>
       </SidebarInset>
