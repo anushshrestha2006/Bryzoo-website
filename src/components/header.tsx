@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { BryzooLogo } from "./icons";
 import { Button } from "./ui/button";
-import { User, UserPlus } from "lucide-react";
+import { User, UserPlus, Bell } from "lucide-react";
+import { DarkModeToggle } from "./dark-mode-toggle";
 
 export default function Header() {
   return (
@@ -13,6 +14,13 @@ export default function Header() {
         </Link>
         <div className="flex flex-1 items-center justify-end space-x-2">
           <nav className="flex items-center space-x-1">
+            <Button variant="ghost" size="icon" asChild>
+                <Link href="#">
+                    <Bell className="h-5 w-5" />
+                    <span className="sr-only">Notifications</span>
+                </Link>
+            </Button>
+            <DarkModeToggle />
             <Button variant="ghost" asChild>
               <Link href="/login">
                 <User className="mr-2 h-4 w-4" />
